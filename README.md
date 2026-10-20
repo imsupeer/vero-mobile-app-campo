@@ -1,0 +1,1 @@
+# vero-mobile-app-campo

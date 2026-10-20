@@ -1,0 +1,810 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#005059" />
+    <title>VERO · Identidade visual</title>
+    <link rel="icon" type="image/svg+xml" href="marca/logo/vero-symbol.svg" />
+    <link rel="stylesheet" href="tipografia/fontes/vero-fonts.css" />
+    <link rel="stylesheet" href="cores/tokens.css" />
+    <link rel="stylesheet" href="movimento/vero-motion.css" />
+    <style>
+      /* =========================================================================
+   Esta página é só a vitrine. Ela usa os mesmos tokens do sistema
+   (cores/tokens.css) para que o que você vê aqui seja o que existe lá.
+   ========================================================================= */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family:
+          'Inter',
+          system-ui,
+          -apple-system,
+          sans-serif;
+        color: var(--ink);
+        background: var(--page);
+        -webkit-font-smoothing: antialiased;
+        line-height: 1.55;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: 'Poppins', system-ui, sans-serif;
+        letter-spacing: -0.01em;
+        line-height: 1.2;
+      }
+
+      .capa {
+        background: var(--sidebar);
+        color: #eff6f6;
+        padding: 64px 32px 56px;
+      }
+      .capa__in {
+        max-width: 1080px;
+        margin: 0 auto;
+      }
+      .capa img {
+        height: 34px;
+        margin-bottom: 28px;
+      }
+      .capa h1 {
+        font-size: clamp(30px, 5vw, 46px);
+        font-weight: 700;
+        color: #fff;
+      }
+      .capa p {
+        margin-top: 12px;
+        max-width: 62ch;
+        color: rgba(239, 246, 246, 0.72);
+        font-size: 16px;
+      }
+      .capa__meta {
+        margin-top: 28px;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .tag {
+        font-size: 11.5px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 6px 12px;
+        border-radius: 99px;
+        background: rgba(255, 255, 255, 0.08);
+        color: rgba(239, 246, 246, 0.85);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+      }
+
+      main {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 0 32px 96px;
+      }
+      section {
+        padding-top: 56px;
+      }
+      section > h2 {
+        font-size: 24px;
+        font-weight: 700;
+      }
+      section > .lead {
+        margin-top: 8px;
+        color: var(--muted);
+        max-width: 68ch;
+        font-size: 15px;
+      }
+      .grade {
+        display: grid;
+        gap: 16px;
+        margin-top: 24px;
+      }
+
+      .bloco {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--r-card);
+        padding: 22px;
+        box-shadow: var(--sombra);
+      }
+
+      /* ---- cores ---- */
+      .cores {
+        grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
+      }
+      .cor {
+        border: 1px solid var(--border);
+        border-radius: var(--r);
+        overflow: hidden;
+        background: var(--surface);
+      }
+      .cor__amostra {
+        height: 76px;
+      }
+      .cor__info {
+        padding: 10px 12px;
+      }
+      .cor__nome {
+        font-size: 12.5px;
+        font-weight: 600;
+      }
+      .cor__hex {
+        font-family: 'IBM Plex Mono', ui-monospace, monospace;
+        font-size: 11.5px;
+        color: var(--muted);
+        margin-top: 2px;
+      }
+      .cor__uso {
+        font-size: 11.5px;
+        color: var(--muted2);
+        margin-top: 6px;
+        line-height: 1.4;
+      }
+
+      /* ---- tipografia ---- */
+      .tipo {
+        display: grid;
+        gap: 18px;
+      }
+      .tipo__linha {
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 14px;
+      }
+      .tipo__rot {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 11px;
+        color: var(--muted2);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 6px;
+      }
+
+      /* ---- componentes ---- */
+      .vkpi {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--r-card);
+        padding: 14px 16px;
+        box-shadow: 0 1px 2px rgba(43, 32, 24, 0.05);
+      }
+      .vhint {
+        font-size: 11.5px;
+        color: var(--muted);
+      }
+      .vhint--rot {
+        font-size: 10.5px;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        color: var(--muted2);
+      }
+      .vnum {
+        color: var(--ink);
+        line-height: 1.15;
+        font-size: 1.35rem;
+        font-weight: 600;
+        font-family: 'IBM Plex Mono', monospace;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .btn {
+        min-height: 44px;
+        padding: 0 20px;
+        border: 0;
+        border-radius: 11px;
+        background: var(--accent);
+        color: #fff;
+        font:
+          700 12.5px 'Inter',
+          sans-serif;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: background 0.16s var(--m-out, ease);
+      }
+      .btn:hover {
+        background: var(--accent-deep);
+      }
+      .btn:active {
+        transform: scale(0.97);
+      }
+      .btn--2 {
+        background: transparent;
+        color: var(--accent);
+        border: 1px solid var(--border2);
+      }
+      .btn--2:hover {
+        background: var(--warm);
+      }
+
+      .selo {
+        display: inline-block;
+        font-size: 11.5px;
+        font-weight: 600;
+        padding: 4px 10px;
+        border-radius: 99px;
+      }
+      .selo--ok {
+        background: var(--pos-bg);
+        color: var(--pos);
+      }
+      .selo--at {
+        background: var(--amber-bg);
+        color: var(--amber-d);
+      }
+      .selo--er {
+        background: #fae6e3;
+        color: var(--danger);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13.5px;
+      }
+      th {
+        text-align: left;
+        font-size: 10.5px;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        color: var(--muted2);
+        padding: 8px 10px;
+        border-bottom: 1px solid var(--border);
+      }
+      td {
+        padding: 10px;
+        border-bottom: 1px solid var(--track);
+      }
+      td.num {
+        text-align: right;
+        font-family: 'IBM Plex Mono', monospace;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .campo label {
+        display: block;
+        font-size: 12px;
+        font-weight: 700;
+        margin-bottom: 4px;
+      }
+      .campo__box {
+        display: flex;
+        align-items: center;
+        border-bottom: 1.5px solid var(--border);
+        padding: 4px 2px;
+        transition: border-color 0.16s;
+      }
+      .campo__box:focus-within {
+        border-color: var(--accent);
+      }
+      .campo input {
+        flex: 1;
+        border: 0;
+        outline: 0;
+        background: none;
+        padding: 8px 0;
+        font:
+          15px 'Inter',
+          sans-serif;
+      }
+
+      /* ---- imagens ---- */
+      .imgs {
+        grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      }
+      .img {
+        border: 1px solid var(--border);
+        border-radius: var(--r);
+        overflow: hidden;
+        background: var(--surface);
+      }
+      .img img {
+        width: 100%;
+        height: 132px;
+        object-fit: cover;
+        display: block;
+        background: var(--warm);
+      }
+      .img figcaption {
+        padding: 9px 11px;
+        font-size: 11.5px;
+        color: var(--muted);
+      }
+      .img .peso {
+        font-family: 'IBM Plex Mono', monospace;
+        color: var(--muted2);
+      }
+
+      .logos {
+        grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      }
+      .logo {
+        border: 1px solid var(--border);
+        border-radius: var(--r);
+        padding: 20px;
+        display: grid;
+        place-items: center;
+        min-height: 118px;
+        background: var(--surface);
+      }
+      .logo--escuro {
+        background: var(--sidebar);
+      }
+      .logo img {
+        max-width: 100%;
+        max-height: 52px;
+      }
+      .logo figcaption {
+        margin-top: 12px;
+        font-size: 11px;
+        color: var(--muted2);
+        font-family: 'IBM Plex Mono', monospace;
+        text-align: center;
+      }
+      .logo--escuro figcaption {
+        color: rgba(239, 246, 246, 0.55);
+      }
+
+      .nota {
+        margin-top: 18px;
+        padding: 14px 16px;
+        border-left: 3px solid var(--amber);
+        background: var(--amber-bg);
+        border-radius: 0 var(--r) var(--r) 0;
+        font-size: 13.5px;
+        line-height: 1.55;
+      }
+      .nota strong {
+        display: block;
+        margin-bottom: 3px;
+      }
+
+      footer {
+        border-top: 1px solid var(--border);
+        margin-top: 72px;
+        padding: 28px 32px;
+        text-align: center;
+        color: var(--muted2);
+        font-size: 12.5px;
+      }
+
+      @media (max-width: 640px) {
+        main {
+          padding: 0 18px 72px;
+        }
+        .capa {
+          padding: 44px 18px 40px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="capa">
+      <div class="capa__in">
+        <img src="marca/logo/vero-lockup-white.svg" alt="VERO" />
+        <h1>Identidade visual</h1>
+        <p>
+          O sistema de design do VERO, como ele existe hoje no produto. Tudo nesta página sai dos mesmos arquivos que o sistema carrega — não é uma
+          recriação.
+        </p>
+        <div class="capa__meta">
+          <span class="tag">Agro · dentro e fora da porteira</span>
+          <span class="tag">Web + campo</span>
+          <span class="tag">25/09/2026</span>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section>
+        <h2>A marca</h2>
+        <p class="lead">
+          Três formas: o símbolo sozinho, o lockup horizontal e a versão empilhada. Cada uma tem par claro e escuro. Use o par certo — símbolo branco
+          sobre fundo claro some, e é o erro mais comum.
+        </p>
+        <div class="grade logos">
+          <figure class="logo">
+            <img src="marca/logo/vero-symbol.svg" alt="Símbolo VERO" />
+            <figcaption>vero-symbol</figcaption>
+          </figure>
+          <figure class="logo logo--escuro">
+            <img src="marca/logo/vero-symbol-white.svg" alt="Símbolo VERO branco" />
+            <figcaption>vero-symbol-white</figcaption>
+          </figure>
+          <figure class="logo">
+            <img src="marca/logo/vero-lockup.svg" alt="Lockup VERO" />
+            <figcaption>vero-lockup</figcaption>
+          </figure>
+          <figure class="logo logo--escuro">
+            <img src="marca/logo/vero-lockup-white.svg" alt="Lockup VERO branco" />
+            <figcaption>vero-lockup-white</figcaption>
+          </figure>
+          <figure class="logo">
+            <img src="marca/logo/vero-stacked.svg" alt="VERO empilhado" />
+            <figcaption>vero-stacked</figcaption>
+          </figure>
+          <figure class="logo logo--escuro">
+            <img src="marca/logo/vero-stacked-white.svg" alt="VERO empilhado branco" />
+            <figcaption>vero-stacked-white</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section>
+        <h2>Cores</h2>
+        <p class="lead">
+          Um teal profundo como cor de ação e um fundo quente, cor de papel. A combinação é deliberada: o sistema é usado horas seguidas, e branco
+          puro cansa. Os nomes abaixo são os tokens reais — use <code>var(--nome)</code>, nunca o hex solto.
+        </p>
+
+        <h3 style="margin-top: 26px; font-size: 15px">Ação e marca</h3>
+        <div class="grade cores">
+          <div class="cor">
+            <div class="cor__amostra" style="background: #005059"></div>
+            <div class="cor__info">
+              <div class="cor__nome">--accent</div>
+              <div class="cor__hex">#005059</div>
+              <div class="cor__uso">Botões, links, foco. A cor da marca</div>
+            </div>
+          </div>
+          <div class="cor">
+            <div class="cor__amostra" style="background: #00363d"></div>
+            <div class="cor__info">
+              <div class="cor__nome">--accent-deep</div>
+              <div class="cor__hex">#00363D</div>
+              <div class="cor__uso">Estado ativo e passar o mouse</div>
+            </div>
+          </div>
+          <div class="cor">
+            <div class="cor__amostra" style="background: #2a767c"></div>
+            <div class="cor__info">
+              <div class="cor__nome">--accent-3</div>
+              <div class="cor__hex">#2A767C</div>
+              <div class="cor__uso">Apoio, gráficos</div>
+            </div>
+          </div>
+          <div class="cor">
+            <div class="cor__amostra" style="background: #4e9ca1"></div>
+            <div class="cor__info">
+              <div class="cor__nome">--olive</div>
+              <div class="cor__hex">#4E9CA1</div>
+              <div class="cor__uso">Detalhes claros sobre fundo escuro</div>
+            </div>
+          </div>
+          <div class="cor">
+            <div class="cor__amostra" style="background: #08262a"></div>
+            <div class="cor__info">
+              <div class="cor__nome">--sidebar</div>
+              <div class="cor__hex">#08262A</div>
+              <div class="cor__uso">Barra lateral e cabeçalhos escuros</div>
+            </div>
+          </div>
+        </div>
+
+        <h3 style="margin-top: 30px; font-size: 15px">Superfícies</h3>
+        <div class="grade cores">
+          <div class="cor">
+            <div class="cor__amostra" style="background: #edeae0"></div>
+            <div class="cor__info">
+              <div class="cor__nome">--page</div>
+              <div class="cor__hex">#EDEAE0</div>
+              <div class="cor__uso">Fundo da página. Cor de papel, não branco</div>
+            </div>
+          </div>
+          <div class="cor">
+            <div class="cor__amostra" style="background: #fff; border-bottom: 1px solid #e3d9c8"></div>
+            <div class="cor__info">
+              <div class="cor__nome">--surface</div>
+              <div class="cor__hex">#FFFFFF</div>
+              <div class="cor__uso">Cartões e tabelas</div>
+            </div>
+          </div>
+          <div class="cor">
+            <div class="cor__amostra" style="background: #fbf8f2"></div>
+            <div class="cor__info">
+              <div class="cor__nome">--warm</div>
+              <div class="cor__hex">#FBF8F2</div>
+              <div class="cor__uso">Superfície secundária, linha alternada</div>
+            </div>
+          </div>
+          <div class="cor">
+            <div class="cor__amostra" style="background: #e3d9c8"></div>
+            <div class="cor__info">
+              <div class="cor__nome">--border</div>
+              <div class="cor__hex">#E3D9C8</div>
+              <div class="cor__uso">Contorno padrão</div>
+            </div>
+          </div>
+          <div class="cor">
+            <div class="cor__amostra" style="background: #eee6d6"></div>
+            <div class="cor__info">
+              <div class="cor__nome">--track</div>
+              <div class="cor__hex">#EEE6D6</div>
+              <div class="cor__uso">Trilhos, divisórias de tabela</div>
+            </div>
+          </div>
+        </div>
+
+        <h3 style="margin-top: 30px; font-size: 15px">Texto</h3>
+        <div class="grade cores">
+          <div class="cor">
+            <div class="cor__amostra" style="background: #241b14"></div>
+            <div class="cor__info">
+              <div class="cor__nome">--ink</div>
+              <div class="cor__hex">#241B14</div>
+              <div class="cor__uso">Texto principal</div>
+            </div>
+          </div>
+          <div class="cor">
+            <div class="cor__amostra" style="background: #8a7c68"></div>
+            <div class="cor__info">
+              <div class="cor__nome">--muted</div>
+              <div class="cor__hex">#8A7C68</div>
+              <div class="cor__uso">Apoio e legendas</div>
+            </div>
+          </div>
+          <div class="cor">
+            <div class="cor__amostra" style="background: #9a8c78"></div>
+            <div class="cor__info">
+              <div class="cor__nome">--muted2</div>
+              <div class="cor__hex">#9A8C78</div>
+              <div class="cor__uso">Rótulos em maiúsculas</div>
+            </div>
+          </div>
+          <div class="cor">
+            <div class="cor__amostra" style="background: #c3b49e"></div>
+            <div class="cor__info">
+              <div class="cor__nome">--faint</div>
+              <div class="cor__hex">#C3B49E</div>
+              <div class="cor__uso">Marca d'água, texto desligado</div>
+            </div>
+          </div>
+        </div>
+
+        <h3 style="margin-top: 30px; font-size: 15px">Estado</h3>
+        <div class="grade cores">
+          <div class="cor">
+            <div class="cor__amostra" style="background: #0e7e72"></div>
+            <div class="cor__info">
+              <div class="cor__nome">--pos</div>
+              <div class="cor__hex">#0E7E72</div>
+              <div class="cor__uso">Positivo, concluído, saldo a favor</div>
+            </div>
+          </div>
+          <div class="cor">
+            <div class="cor__amostra" style="background: #b57c1a"></div>
+            <div class="cor__info">
+              <div class="cor__nome">--amber</div>
+              <div class="cor__hex">#B57C1A</div>
+              <div class="cor__uso">Atenção, pendente</div>
+            </div>
+          </div>
+          <div class="cor">
+            <div class="cor__amostra" style="background: #b23a2e"></div>
+            <div class="cor__info">
+              <div class="cor__nome">--danger</div>
+              <div class="cor__hex">#B23A2E</div>
+              <div class="cor__uso">Erro, vencido, exclusão</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="nota">
+          <strong>Nunca use cor sozinha para dizer alguma coisa.</strong>
+          Vermelho e verde são a dupla mais comum de daltonismo, e boa parte deste sistema é lida sob sol forte, onde a diferença some. Toda cor de
+          estado anda com um rótulo, um ícone ou um sinal.
+        </div>
+      </section>
+
+      <section>
+        <h2>Tipografia</h2>
+        <p class="lead">
+          Três famílias, cada uma com um trabalho. <strong>Poppins</strong> nos títulos, <strong>Inter</strong> no corpo e nos dados,
+          <strong>IBM Plex Mono</strong> nos números.
+        </p>
+        <div class="bloco tipo">
+          <div class="tipo__linha">
+            <div class="tipo__rot">Poppins 700 · título de página</div>
+            <div style="font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 30px">Caderno de campo</div>
+          </div>
+          <div class="tipo__linha">
+            <div class="tipo__rot">Poppins 600 · título de seção</div>
+            <div style="font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 21px">Apontamentos do período</div>
+          </div>
+          <div class="tipo__linha">
+            <div class="tipo__rot">Inter 400 · corpo</div>
+            <div style="font-size: 15px">
+              Registro de atividades feitas na válvula, por safra e por responsável. A régua de cálculo acompanha a fase fenológica.
+            </div>
+          </div>
+          <div class="tipo__linha">
+            <div class="tipo__rot">Inter 600 · rótulo de campo</div>
+            <div style="font-weight: 600; font-size: 12px">Válvula responsável</div>
+          </div>
+          <div>
+            <div class="tipo__rot">IBM Plex Mono · números</div>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-variant-numeric: tabular-nums; font-size: 21px">
+              1.284,50 kg &nbsp;·&nbsp; R$ 43.920,00 &nbsp;·&nbsp; 12,4 ha
+            </div>
+          </div>
+        </div>
+        <div class="nota">
+          <strong>Número é sempre monoespaçado e alinhado à direita.</strong>
+          Numa coluna de valores, fonte proporcional desalinha as casas decimais e o olho perde a comparação — que é justamente para o que a tabela
+          serve. Use <code>font-variant-numeric: tabular-nums</code>.
+        </div>
+      </section>
+
+      <section>
+        <h2>Componentes</h2>
+        <p class="lead">Os que aparecem em quase toda tela.</p>
+
+        <h3 style="margin-top: 26px; font-size: 15px">Indicador (KPI)</h3>
+        <div class="grade" style="grid-template-columns: repeat(auto-fit, minmax(186px, 1fr))">
+          <div class="vkpi">
+            <span class="vhint vhint--rot">Colhido no mês</span><span class="vnum">18.420 kg</span><span class="vhint">+12% sobre agosto</span>
+          </div>
+          <div class="vkpi">
+            <span class="vhint vhint--rot">Custo por kg</span><span class="vnum">R$ 2,38</span><span class="vhint">meta R$ 2,50</span>
+          </div>
+          <div class="vkpi">
+            <span class="vhint vhint--rot">Área em produção</span><span class="vnum">42,6 ha</span><span class="vhint">9 válvulas</span>
+          </div>
+          <div class="vkpi">
+            <span class="vhint vhint--rot">Pendências</span><span class="vnum">3</span><span class="vhint">aguardando aprovação</span>
+          </div>
+        </div>
+
+        <h3 style="margin-top: 30px; font-size: 15px">Botões e selos</h3>
+        <div class="bloco" style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center">
+          <button class="btn">Salvar</button>
+          <button class="btn btn--2">Cancelar</button>
+          <span class="selo selo--ok">Concluído</span>
+          <span class="selo selo--at">Pendente</span>
+          <span class="selo selo--er">Vencido</span>
+        </div>
+
+        <h3 style="margin-top: 30px; font-size: 15px">Campo</h3>
+        <div class="bloco" style="max-width: 380px">
+          <div class="campo">
+            <label for="demo">Válvula</label>
+            <div class="campo__box"><input id="demo" type="text" placeholder="Q-01 · Vitória" /></div>
+          </div>
+        </div>
+
+        <h3 style="margin-top: 30px; font-size: 15px">Tabela</h3>
+        <div class="bloco" style="padding: 0; overflow: hidden">
+          <table>
+            <thead>
+              <tr>
+                <th>Válvula</th>
+                <th>Variedade</th>
+                <th style="text-align: right">Área</th>
+                <th style="text-align: right">Colhido</th>
+                <th>Situação</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Q-01</td>
+                <td>Vitória</td>
+                <td class="num">4,50</td>
+                <td class="num">6.240</td>
+                <td><span class="selo selo--ok">Concluído</span></td>
+              </tr>
+              <tr>
+                <td>Q-02</td>
+                <td>Arra 15</td>
+                <td class="num">5,50</td>
+                <td class="num">7.180</td>
+                <td><span class="selo selo--at">Pendente</span></td>
+              </tr>
+              <tr>
+                <td>Q-03</td>
+                <td>Palmer</td>
+                <td class="num">6,10</td>
+                <td class="num">5.000</td>
+                <td><span class="selo selo--ok">Concluído</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>Movimento</h2>
+        <p class="lead">
+          Curto e discreto. Este sistema é usado o dia inteiro, e o que encanta na primeira vez atrasa na trigésima. As curvas e durações estão em
+          <code>movimento/vero-motion.css</code>.
+        </p>
+        <div class="grade" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))">
+          <div class="bloco">
+            <div class="tipo__rot">Resposta ao toque</div>
+            <div style="font-size: 14px; margin-top: 6px">120 ms · <code>scale(.97)</code></div>
+          </div>
+          <div class="bloco">
+            <div class="tipo__rot">Entrada de elemento</div>
+            <div style="font-size: 14px; margin-top: 6px">180 ms · ease-out</div>
+          </div>
+          <div class="bloco">
+            <div class="tipo__rot">Saída</div>
+            <div style="font-size: 14px; margin-top: 6px">140 ms · mais rápida que a entrada</div>
+          </div>
+          <div class="bloco">
+            <div class="tipo__rot">Movimento reduzido</div>
+            <div style="font-size: 14px; margin-top: 6px">Respeitado, sempre</div>
+          </div>
+        </div>
+        <div class="nota">
+          <strong>A única animação que nunca se remove é a resposta ao toque.</strong>
+          Sem ela, num aparelho lento, a pessoa acha que não pegou e toca de novo — e lança duas vezes.
+        </div>
+      </section>
+
+      <section>
+        <h2>Imagens do sistema</h2>
+        <p class="lead">As artes que o produto usa hoje.</p>
+        <div class="grade imgs">
+          <figure class="img">
+            <img src="imagens/vero_login_bg.svg" alt="Fundo da tela de acesso" />
+            <figcaption>vero_login_bg.svg<br /><span class="peso">5 KB · fundo do acesso</span></figcaption>
+          </figure>
+          <figure class="img">
+            <img src="imagens/dashboard-banner.webp" alt="Banner do painel" />
+            <figcaption>dashboard-banner.webp<br /><span class="peso">23 KB · painel</span></figcaption>
+          </figure>
+          <figure class="img">
+            <img src="imagens/banner_noticia.png" alt="Banner de notícia" />
+            <figcaption>banner_noticia.png<br /><span class="peso">40 KB</span></figcaption>
+          </figure>
+          <figure class="img">
+            <img src="imagens/banner_evento.png" alt="Banner de evento" />
+            <figcaption>banner_evento.png<br /><span class="peso">57 KB</span></figcaption>
+          </figure>
+          <figure class="img">
+            <img src="imagens/banner_informe.png" alt="Banner de informe" />
+            <figcaption>banner_informe.png<br /><span class="peso">222 KB</span></figcaption>
+          </figure>
+          <figure class="img">
+            <img src="imagens/banner_niver.png" alt="Banner de aniversário" />
+            <figcaption>banner_niver.png<br /><span class="peso" style="color: var(--danger)">3,4 MB — pesado demais</span></figcaption>
+          </figure>
+          <figure class="img">
+            <img src="imagens/uni_login_bg.png" alt="Fundo do portal" />
+            <figcaption>uni_login_bg.png<br /><span class="peso" style="color: var(--amber-d)">1,8 MB — pesado</span></figcaption>
+          </figure>
+          <figure class="img">
+            <img src="imagens/logo_bios.png" alt="Logo BIOS" />
+            <figcaption>logo_bios.png<br /><span class="peso">8 KB · marca anterior</span></figcaption>
+          </figure>
+        </div>
+        <div class="nota">
+          <strong>Duas imagens estão fora do orçamento de peso.</strong>
+          O banner de aniversário tem 3,4 MB e o fundo do portal, 1,8 MB. Numa conexão de campo isso é meio minuto de espera por uma arte decorativa.
+          Convertidas para WebP, deviam caber em menos de 150 KB cada — o
+          <code>dashboard-banner.webp</code>, com qualidade parecida, tem 23 KB.
+        </div>
+      </section>
+
+      <section>
+        <h2>Telas</h2>
+        <p class="lead">A tela de acesso, extraída do sistema e funcionando sozinha no navegador.</p>
+        <div class="bloco">
+          <a class="btn" style="text-decoration: none; display: inline-grid; place-items: center" href="telas/login/login.html"
+            >Abrir a tela de acesso</a
+          >
+          <p style="margin-top: 14px; font-size: 13.5px; color: var(--muted)">
+            Cartão dividido: formulário objetivo à esquerda, arte da marca à direita. A arte é trocável por cliente — o sistema é marca-branca.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer>VERO by Origo · identidade visual · 25/09/2026</footer>
+  </body>
+</html>

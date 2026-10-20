@@ -1,0 +1,255 @@
+/* ============================================================================
+   VERO — sistema de movimento  ·  25/09/2026
+   ----------------------------------------------------------------------------
+   Uma régua só para todo o sistema, com três compromissos:
+
+   1. IDENTIDADE. Uma curva de saída forte (--m-out) em tudo que entra ou
+      responde a um toque. É ela que dá o "jeito VERO": firme no começo,
+      assentando devagar no fim. Sem quique — isto é um ERP, não um brinquedo.
+
+   2. MÁQUINA FRACA. Só `transform` e `opacity` se movem: são as duas
+      propriedades que o navegador resolve na GPU, sem recalcular layout nem
+      repintar. Nada de animar largura, altura, sombra ou filtro em hover — é
+      justamente o que derruba o quadro num computador de escritório antigo.
+      Toda duração fica em 240ms ou menos.
+
+   3. RESPEITO. `prefers-reduced-motion` desliga o movimento e mantém só o que
+      ajuda a entender (opacidade). Hover só em ponteiro fino — no toque, hover
+      dispara no dedo e pisca sem motivo.
+
+   Por que tokens e não valores soltos: hoje o sistema tem 44 transições em 10
+   arquivos, com cinco curvas diferentes e a `ease` padrão do navegador, que é
+   fraca demais para parecer intencional. Uma tela abrindo em 150ms ao lado de
+   outra em 400ms não é variedade, é falta de régua.
+   ============================================================================ */
+
+:root {
+  /* ── curvas ─────────────────────────────────────────────────────────────
+     --m-out   entra, aparece, responde ao toque. Forte: o olho vê o movimento
+               imediatamente, e é por isso que 180ms com ela parece mais rápido
+               que 180ms com a `ease` do navegador.
+     --m-inout algo que JÁ está na tela e se desloca.
+     --m-soft  cor, fundo, borda — onde não há deslocamento para acompanhar.
+     `ease-in` não aparece aqui de propósito: começa devagar justamente no
+     instante em que a pessoa está olhando, e faz a interface parecer lenta. */
+  --m-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --m-inout: cubic-bezier(0.65, 0, 0.35, 1);
+  --m-soft: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ── durações ────────────────────────────────────────────────────────── */
+  --m-1: 120ms; /* toque, hover, foco */
+  --m-2: 180ms; /* abas, menus, pílulas */
+  --m-3: 240ms; /* modal, painel, gaveta */
+
+  /* saída é mais rápida que entrada: quem fecha já decidiu */
+  --m-saida: 140ms;
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   1. TOQUE — o retorno mais importante do sistema
+   Um botão que não afunda parece que não ouviu o clique. 0.97 é suficiente:
+   percebe-se sem virar brinquedo. Vale para tudo que se pressiona.
+   ════════════════════════════════════════════════════════════════════════ */
+.vbtn,
+.vicon,
+.pcv-pills button,
+.pcv-topicos button,
+.af-passos button,
+.af-modo__card,
+.bios-nav a,
+.vbadge-btn {
+  transition:
+    transform var(--m-1) var(--m-out),
+    background-color var(--m-1) var(--m-soft),
+    color var(--m-1) var(--m-soft),
+    border-color var(--m-1) var(--m-soft);
+}
+
+.vbtn:active,
+.vicon:active,
+.pcv-pills button:active,
+.pcv-topicos button:active,
+.af-passos button:active {
+  transform: scale(0.97);
+}
+/* cartão grande afunda menos: a mesma escala num alvo largo exagera */
+.af-modo__card:active,
+.pcv-kpi:active,
+.pf-kpi:active {
+  transform: scale(0.995);
+}
+
+/* desabilitado não responde ao toque — prometer retorno que não vem é pior
+   que não prometer nada */
+.vbtn:disabled:active,
+.vbtn[aria-disabled='true']:active,
+.vicon:disabled:active {
+  transform: none;
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   2. HOVER — só onde existe ponteiro de verdade
+   No toque, o hover dispara junto com o clique e pisca sem motivo.
+   ════════════════════════════════════════════════════════════════════════ */
+@media (hover: hover) and (pointer: fine) {
+  .vcard,
+  .pcv-card,
+  .pf-card {
+    transition: transform var(--m-2) var(--m-out);
+  }
+  /* 1px. Mais que isso vira cartão flutuante, que é outro produto.
+     E é `transform`, não `box-shadow`: sombra animada repinta a cada quadro. */
+  .pcv-kpi:hover,
+  .pf-kpi:hover {
+    transform: translateY(-1px);
+  }
+  .vtable tbody tr,
+  .pcv-tbl tbody tr {
+    transition: background-color var(--m-1) var(--m-soft);
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   3. FOCO — quem navega por teclado merece ver onde está
+   Sem transição no anel: o foco tem de ser instantâneo, não "aparecer".
+   ════════════════════════════════════════════════════════════════════════ */
+.vbtn:focus-visible,
+.vicon:focus-visible,
+.pcv-topicos button:focus-visible,
+.af-passos button:focus-visible {
+  outline: 2px solid var(--accent, #0f3f45);
+  outline-offset: 2px;
+  transition: none;
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   4. ENTRADA — nada nasce do nada
+   Escala a partir de .98, nunca de 0: no mundo real as coisas não surgem do
+   vazio, e o olho estranha quando surgem na tela.
+   ════════════════════════════════════════════════════════════════════════ */
+@keyframes m-entra {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes m-surge {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* painéis e cartões ao abrir a tela. Escalonado só nos primeiros seis: passar
+   disso faz a página inteira parecer que está carregando devagar. */
+@media (prefers-reduced-motion: no-preference) {
+  .pcv-kpis > *,
+  .pf-kpis > * {
+    animation: m-entra var(--m-3) var(--m-out) backwards;
+  }
+  .pcv-kpis > :nth-child(1),
+  .pf-kpis > :nth-child(1) {
+    animation-delay: 0ms;
+  }
+  .pcv-kpis > :nth-child(2),
+  .pf-kpis > :nth-child(2) {
+    animation-delay: 30ms;
+  }
+  .pcv-kpis > :nth-child(3),
+  .pf-kpis > :nth-child(3) {
+    animation-delay: 60ms;
+  }
+  .pcv-kpis > :nth-child(4),
+  .pf-kpis > :nth-child(4) {
+    animation-delay: 90ms;
+  }
+  .pcv-kpis > :nth-child(5),
+  .pf-kpis > :nth-child(5) {
+    animation-delay: 120ms;
+  }
+  .pcv-kpis > :nth-child(6),
+  .pf-kpis > :nth-child(6) {
+    animation-delay: 150ms;
+  }
+  /* do sétimo em diante entram juntos: o escalonado é tempero, não fila */
+  .pcv-kpis > :nth-child(n + 7),
+  .pf-kpis > :nth-child(n + 7) {
+    animation-delay: 170ms;
+  }
+
+  /* o corpo do painel entra depois dos KPIs, sem escalonar item a item */
+  .pcv-grid,
+  .pcv-tbl-wrap,
+  .pf-grid {
+    animation: m-surge var(--m-3) var(--m-soft) 120ms backwards;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   5. ABA ATIVA — a linha embaixo desliza em vez de piscar
+   ════════════════════════════════════════════════════════════════════════ */
+.pcv-topicos button,
+.af-passos button {
+  transition:
+    transform var(--m-1) var(--m-out),
+    color var(--m-2) var(--m-soft),
+    border-bottom-color var(--m-2) var(--m-out);
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   6. MODAL — entra do jeito que sai, pela mesma porta
+   Fechar é mais rápido que abrir: quem fecha já decidiu.
+   ════════════════════════════════════════════════════════════════════════ */
+.vmodal.open {
+  animation: m-surge var(--m-2) var(--m-soft);
+}
+.vmodal.open > .vbox,
+.vmodal.open .vbox {
+  animation: m-entra var(--m-3) var(--m-out);
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   7. MENOS MOVIMENTO — pedido do sistema operacional, obedecido
+   Não é "sem animação": opacidade continua, porque ela explica (algo apareceu).
+   O que sai é o deslocamento, que é o que causa enjoo.
+   ════════════════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  .vbtn:active,
+  .vicon:active,
+  .pcv-pills button:active,
+  .pcv-topicos button:active,
+  .af-passos button:active,
+  .af-modo__card:active,
+  .pcv-kpi:active,
+  .pf-kpi:active,
+  .pcv-kpi:hover,
+  .pf-kpi:hover {
+    transform: none;
+  }
+  .pcv-kpis > *,
+  .pf-kpis > *,
+  .vmodal.open .vbox {
+    animation: m-surge var(--m-2) linear backwards;
+  }
+  .pcv-grid,
+  .pcv-tbl-wrap,
+  .pf-grid {
+    animation: none;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   8. IMPRESSÃO — papel não anima
+   ════════════════════════════════════════════════════════════════════════ */
+@media print {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

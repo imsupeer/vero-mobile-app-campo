@@ -1,0 +1,10 @@
+{
+  "build": {
+    "preview": {
+      "distribution": "internal",
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://chiquinho.verobyorigo.agr.br/api/v1"
+      }
+    }
+  }
+}

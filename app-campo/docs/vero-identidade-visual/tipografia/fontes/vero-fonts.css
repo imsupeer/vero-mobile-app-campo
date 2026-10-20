@@ -1,0 +1,68 @@
+/* NOTA DO PACOTE DE IDENTIDADE (25/09/2026)
+   Os @font-face da familia Supreme foram removidos deste arquivo: ela tem
+   licenca propria da Befonts e nao foi redistribuida aqui. O padrao atual
+   do sistema e Poppins (titulos) + Inter (corpo), que estao no pacote. */
+
+/* ============================================================
+   VERO — assets/vendor/fonts/vero-fonts.css
+   Fontes self-host (QA-013: sem CDN em runtime), referenciado por
+   ~68 páginas do sistema via <link>.
+
+   ESTADO ATUAL (Etapa 3, 01/09/2026 — decisão do usuário conforme
+   o design "vero Ajuste.pdf" da Ivaneide): tipografia padrão do
+   sistema é POPPINS (títulos h1-h6, regra global abaixo) + INTER
+   (corpo/dados) — self-host (subset latin; Inter em arquivo
+   VARIÁVEL cobrindo os pesos 400-700). As pilhas de corpo levam
+   'Inter' primeiro em agro.css (body), bios.css (--font-sans),
+   crm.css, uni-portal.css, uni-ajuda.css, index.php (login),
+   _error_page.php e print_doc.php, com 'IBM Plex Sans'/system-ui
+   de fallback. Os @font-face da 'Supreme' (Etapa 1/2, fonte do
+   gerente) permanecem declarados abaixo — substituída como padrão
+   nesta etapa, arquivos preservados para eventual reversão.
+   'IBM Plex Mono' (var(--num), números) segue como estava.
+   ============================================================ */
+
+/* ---- Inter (corpo/dados) — fonte variável, pesos 400–700 ---- */
+@font-face {
+  font-family: 'Inter';
+  src: url('Inter/inter-var.woff2') format('woff2');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+/* ---- Poppins (títulos) ---- */
+@font-face {
+  font-family: 'Poppins';
+  src: url('Poppins/poppins-500.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Poppins';
+  src: url('Poppins/poppins-600.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Poppins';
+  src: url('Poppins/poppins-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Poppins';
+  src: url('Poppins/poppins-800.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+/* Títulos em Poppins em todo o sistema (este arquivo é linkado por
+   todos os shells). Classes de página com font-family próprio ainda
+   vencem esta regra de elemento — comportamento desejado. */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', 'Inter', system-ui, sans-serif;
+}
+

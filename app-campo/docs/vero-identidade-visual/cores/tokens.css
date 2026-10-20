@@ -1,0 +1,66 @@
+/* =========================================================================
+   VERO — tokens de design
+   Extraídos de assets/css/agro.css, que é onde eles vivem no sistema.
+
+   Use sempre `var(--nome)`, nunca o hex solto. Um hex copiado hoje vira
+   uma cor órfã amanhã: quando a paleta mudar, ele fica para trás e ninguém
+   descobre até alguém reparar que uma tela ficou de outra cor.
+   ========================================================================= */
+
+:root {
+  /* ---- marca e ação ---------------------------------------------------- */
+  --accent: #005059; /* botões, links, foco. A cor da marca          */
+  --accent-deep: #00363d; /* estado ativo, passar o mouse                 */
+  --accent-3: #2a767c; /* apoio, séries de gráfico                     */
+  --olive: #4e9ca1; /* detalhes claros sobre fundo escuro           */
+  --sidebar: #08262a; /* barra lateral, cabeçalhos escuros            */
+
+  /* ---- superfícies ------------------------------------------------------
+     O fundo é cor de papel, não branco. É escolha, não acaso: o sistema é
+     usado horas seguidas e branco puro cansa a vista.                      */
+  --page: #edeae0;
+  --surface: #ffffff; /* cartões, tabelas                             */
+  --warm: #fbf8f2; /* superfície secundária, linha alternada       */
+  --border: #e3d9c8;
+  --border2: #ddd2bf;
+  --track: #eee6d6; /* trilhos, divisórias internas                 */
+
+  /* ---- texto ----------------------------------------------------------- */
+  --ink: #241b14; /* principal                                    */
+  --ink2: #2b2018;
+  --muted: #8a7c68; /* apoio, legendas                              */
+  --muted2: #9a8c78; /* rótulos em maiúsculas                        */
+  --faint: #c3b49e; /* marca d'água, desligado                      */
+
+  /* ---- barra lateral (texto sobre o teal escuro) ------------------------ */
+  --side-text: #c6b8a4;
+  --side-label: #7e7060;
+  --side-muted: #8b7c68;
+
+  /* ---- estado -----------------------------------------------------------
+     Cada cor tem o par de fundo, para selo e faixa. NUNCA use a cor
+     sozinha para dizer alguma coisa: vermelho e verde são a dupla mais
+     comum de daltonismo, e sob sol forte a diferença some. Acompanhe
+     sempre de rótulo, ícone ou sinal.                                      */
+  --pos: #0e7e72;
+  --pos-bg: #ddedeb; /* positivo, concluído        */
+  --amber: #b57c1a;
+  --amber-bg: #f3e7c8; /* atenção, pendente          */
+  --amber-d: #7a5410; /* texto sobre amber-bg      */
+  --danger: #b23a2e; /* erro, vencido, exclusão   */
+
+  /* ---- forma ------------------------------------------------------------ */
+  --r-card: 13px; /* cartões                                      */
+  --r: 9px; /* botões, campos                               */
+  --r-sm: 8px; /* selos, ícones                                */
+
+  /* sombra leve: separa o cartão do fundo sem pesar                        */
+  --sombra: 0 1px 2px rgba(20, 26, 31, 0.04), 0 4px 14px rgba(20, 26, 31, 0.06);
+
+  /* ---- tipografia -------------------------------------------------------
+     Poppins nos títulos, Inter no corpo e nos dados, IBM Plex Mono nos
+     números. Ver tipografia/README.md.                                     */
+  --font-titulo: 'Poppins', system-ui, -apple-system, sans-serif;
+  --font-corpo: 'Inter', 'IBM Plex Sans', system-ui, sans-serif;
+  --num: 'IBM Plex Mono', ui-monospace, monospace;
+}
